@@ -1,15 +1,6 @@
-# HDMIKVM POC2 FIX6 — Hardware-Validated Milestone & Quick Start
+# SINGLEMON - AI CODED
 
-**Status:** Hardware validated · 17 October 2026  
-**Components:** Windows `HDMIKVM.exe` + AmigaOS `l3-netkeys` v1.1  
-**Network:** UDP/IPv4, port **6800** (default)  
-**Build instructions:** Not included
-
-## What it does
-
-Automatically routes a Windows PC's keyboard and mouse to an Amiga when the shared monitor displays the Amiga HDMI input. Switching the monitor back restores local Windows control. The Amiga receiver uses standard `input.device`; **no Emu68 changes** are needed.
-
-**Validated baseline (FIX6):** HDMI input detection through DDC/CI VCP `0x60`, keyboard and relative mouse forwarding, Windows desktop input suppression, right-Shift correction, Amiga-key mappings, and transient `UNKNOWN` handling. Default DDC/CI polling is **1000 ms** (configurable **250–2000 ms**).
+Automatically routes a Windows PC's keyboard and mouse to an Amiga when the shared monitor displays the Amiga HDMI input. Switching the monitor back restores local Windows control. The Amiga receiver uses standard `input.device`.
 
 ## 1. AmigaOS setup
 
@@ -22,13 +13,14 @@ Automatically routes a Windows PC's keyboard and mouse to an Amiga when the shar
    ```
 
    This listens on UDP port **6800**. For a different port: `l3-netkeys 7000` (match it with `--port 7000` on Windows).
-4. Leave the receiver running. Stop it with **Ctrl+C** in its Shell when finished.
+   
+5. Leave the receiver running. Stop it with **Ctrl+C** in its Shell when finished.
 
-## 2. Windows setup (no compilation)
+## 2. Windows setup
 
-1. Copy the **already compiled** `HDMIKVM.exe` to a permanent directory, for example `C:\Tools\HDMIKVM\`.
+1. Copy `SINGLEMON.exe` to a permanent directory, for example `C:\Tools\`.
 2. Confirm .NET Framework 4.x is available and DDC/CI is enabled in the monitor's on-screen menu.
-3. While the monitor is **showing Windows**, create a shortcut to `HDMIKVM.exe`.
+3. Create a shortcut to `SINGLEMON.exe`.
 4. Open **Shortcut → Properties → Target** and enter (replace the IP and HDMI input as needed):
 
    ```text
@@ -45,19 +37,17 @@ The source selected at launch is detected as the **Windows** input; `--target 17
 2. Select the **Windows** monitor input and launch the shortcut.
 3. Switch the monitor to the **Amiga** input. After confirmation, PC keyboard and mouse control AmigaOS; normal Windows desktop input is suppressed.
 4. Switch back to the **Windows** input to restore local control.
-5. Close HDMIKVM after returning to the Windows input.
-
-During a source change, the monitor may report `UNKNOWN` for **2–3 seconds**. HDMIKVM temporarily quarantines input instead of sending it to either system.
+5. Close SINGLEMON after returning to the Windows input.
 
 **Emergency release:** **Ctrl+Alt+Shift+F12** restores local Windows input. Low-level Windows hooks are not complete HID isolation; use on an attended desktop.
 
 ## 4. Useful commands and options
 
 ```bat
-HDMIKVM.exe --list
-HDMIKVM.exe --host 192.168.1.29 --target 17 --windows-source auto --capture
-HDMIKVM.exe --host 192.168.1.29 --target 17 --windows-source auto --capture --mouse-scale 0.5
-HDMIKVM.exe --host 192.168.1.29 --target 17 --windows-source auto --capture --interval 2000
+SINGLEMON.exe --list
+SINGLEMON.exe --host 192.168.1.29 --target 17 --windows-source auto --capture
+SINGLEMON.exe --host 192.168.1.29 --target 17 --windows-source auto --capture --mouse-scale 0.5
+SINGLEMON.exe --host 192.168.1.29 --target 17 --windows-source auto --capture --interval 2000
 ```
 
 | Option | Purpose |
@@ -73,12 +63,6 @@ HDMIKVM.exe --host 192.168.1.29 --target 17 --windows-source auto --capture --in
 | `--wheel-steps N` | Amiga cursor-key pulses per wheel notch |
 | `--selftest-keys` | Check keyboard mapping |
 
-If keeping the included launcher, it accepts exactly two arguments and **does not compile**:
-
-```bat
-KVM.cmd 192.168.1.29 17
-```
-
 ### Special keys
 
 | PC keyboard | Amiga |
@@ -91,7 +75,6 @@ KVM.cmd 192.168.1.29 17
 
 ## 5. Important limitations
 
-- DDC/CI source reading depends on the monitor; FIX6 was validated on the development setup, not every model.
+- DDC/CI source reading depends on the monitor; SINGLEMON was validated on the development setup, not every model.
 - Windows low-level hooks cannot guarantee absolute suppression of system/secure-desktop or independently captured HID input.
-- AKVM/1 uses **unauthenticated UDP**, and `l3-netkeys` also understands a remote reset command. Use only on a **trusted/isolated network**; do not expose UDP 6800 to the Internet.
-- Preserve the working **FIX6** executable and unchanged **l3-netkeys v1.1** receiver as the rollback baseline.
+- SINGLEMON uses **unauthenticated UDP**, use only on a **trusted/isolated network**; do not expose UDP 6800 to the Internet.
