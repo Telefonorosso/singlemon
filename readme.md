@@ -72,8 +72,6 @@ SINGLEMON.exe --host 192.168.1.29 --target 17 --windows-source auto --capture --
 | Left Windows | Left Amiga (`0x66`) |
 | Application/Menu | Right Amiga (`0x67`) |
 | Right Windows | Right Amiga (`0x67`) |
-| Left Alt / Right Alt | Left Alt / Right Alt |
-| Left Shift / Right Shift | Left Shift / Right Shift |
 
 ## 5. Important limitations
 
