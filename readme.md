@@ -23,7 +23,7 @@ Automatically routes a Windows PC's keyboard and mouse to an Amiga when the shar
 3. Open **Shortcut → Properties → Target** and enter (replace the IP and "target" (Amiga) input as needed):
 
    ```text
-   "C:\Tools\HDMIKVM\HDMIKVM.exe" --host 192.168.1.29 --target 17 --windows-source auto --capture
+   "C:\Tools\singlemon.exe" --host 192.168.1.29 --target 17 --windows-source auto --capture
    ```
 
 4. Optionally set **Run: Minimized** and place the shortcut on the desktop or Start menu.
