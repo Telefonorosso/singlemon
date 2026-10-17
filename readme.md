@@ -1,6 +1,6 @@
 # singlemon - AI CODED
 
-Automatically routes a Windows PC's keyboard and mouse to an Amiga when the shared monitor displays the Amiga HDMI input. Switching the monitor back restores local Windows control. The Amiga receiver uses standard `input.device`.
+Automatically routes a Windows PC's keyboard and mouse to an Amiga when the shared monitor displays the Amiga input. Switching the monitor back restores local Windows control. The Amiga receiver uses standard `input.device`.
 
 ## 1. AmigaOS setup
 
@@ -20,7 +20,7 @@ Automatically routes a Windows PC's keyboard and mouse to an Amiga when the shar
 
 1. Copy `SINGLEMON.exe` to a permanent directory, for example `C:\Tools\`.
 2. Create a shortcut to `SINGLEMON.exe`.
-3. Open **Shortcut → Properties → Target** and enter (replace the IP and HDMI input as needed):
+3. Open **Shortcut → Properties → Target** and enter (replace the IP and "target" (Amiga) input as needed):
 
    ```text
    "C:\Tools\HDMIKVM\HDMIKVM.exe" --host 192.168.1.29 --target 17 --windows-source auto --capture
