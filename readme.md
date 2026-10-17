@@ -1,4 +1,4 @@
-# SINGLEMON - AI CODED
+# singlemon - AI CODED
 
 Automatically routes a Windows PC's keyboard and mouse to an Amiga when the shared monitor displays the Amiga HDMI input. Switching the monitor back restores local Windows control. The Amiga receiver uses standard `input.device`.
 
