@@ -19,25 +19,23 @@ Automatically routes a Windows PC's keyboard and mouse to an Amiga when the shar
 ## 2. Windows setup
 
 1. Copy `SINGLEMON.exe` to a permanent directory, for example `C:\Tools\`.
-2. Confirm .NET Framework 4.x is available and DDC/CI is enabled in the monitor's on-screen menu.
-3. Create a shortcut to `SINGLEMON.exe`.
-4. Open **Shortcut → Properties → Target** and enter (replace the IP and HDMI input as needed):
+2. Create a shortcut to `SINGLEMON.exe`.
+3. Open **Shortcut → Properties → Target** and enter (replace the IP and HDMI input as needed):
 
    ```text
    "C:\Tools\HDMIKVM\HDMIKVM.exe" --host 192.168.1.29 --target 17 --windows-source auto --capture
    ```
 
-5. Optionally set **Run: Minimized** and place the shortcut on the desktop or Start menu.
+4. Optionally set **Run: Minimized** and place the shortcut on the desktop or Start menu.
 
 The source selected at launch is detected as the **Windows** input; `--target 17` identifies the **Amiga** input. The program does **not** switch the monitor itself.
 
 ## 3. Everyday use
 
 1. Start the Amiga network stack and `l3-netkeys`.
-2. Select the **Windows** monitor input and launch the shortcut.
-3. Switch the monitor to the **Amiga** input. After confirmation, PC keyboard and mouse control AmigaOS; normal Windows desktop input is suppressed.
+2. Select the **Windows** monitor input and launch SINGLEMON.
+3. Switch the monitor to the **Amiga** input. PC keyboard and mouse now control AmigaOS; normal Windows desktop input is suppressed.
 4. Switch back to the **Windows** input to restore local control.
-5. Close SINGLEMON after returning to the Windows input.
 
 **Emergency release:** **Ctrl+Alt+Shift+F12** restores local Windows input. Low-level Windows hooks are not complete HID isolation; use on an attended desktop.
 
@@ -56,7 +54,7 @@ SINGLEMON.exe --host 192.168.1.29 --target 17 --windows-source auto --capture --
 | `--target N` | Amiga monitor input (e.g. `17` or `0x11`) |
 | `--windows-source auto` | Detect Windows input at startup |
 | `--capture` | Enable capture and forwarding; omit for observation only |
-| `--interval N` | DDC/CI polling, **250–2000 ms**; default **1000** |
+| `--interval N` | monitor source polling, **250–2000 ms**; default **1000** |
 | `--monitor N` | Choose the monitor; default `0` |
 | `--port N` | UDP destination port; default `6800` |
 | `--mouse-scale N` | Relative mouse sensitivity; values below `1` are supported |
